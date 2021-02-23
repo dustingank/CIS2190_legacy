@@ -1,0 +1,76 @@
+V "GNAT Lib v2020"
+M P W=b
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_IO
+
+U escape%b		escape.adb		bdb53f3a NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.elementary_functions%s  a-nuelfu.ads  a-nuelfu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+D ada.ads		20200819050642 76789da1 ada%s
+D a-except.ads		20200819050642 a7106115 ada.exceptions%s
+D a-flteio.ads		20200819050642 e18a47a0 ada.float_text_io%s
+D a-inteio.ads		20200819050642 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20200819050642 e4a01f64 ada.io_exceptions%s
+D a-numeri.ads		20200819050642 bb51c45a ada.numerics%s
+D a-nuelfu.ads		20200819050642 03e83d1c ada.numerics.elementary_functions%s
+D a-ngelfu.ads		20200819050642 55716239 ada.numerics.generic_elementary_functions%s
+D a-stream.ads		20200819050642 119b8fb3 ada.streams%s
+D a-tags.ads		20200819050643 edddc8f0 ada.tags%s
+D a-textio.ads		20200819050643 aef4d56d ada.text_io%s
+D a-tiflio.ads		20200819050643 bf196650 ada.text_io.float_io%s
+D a-tiinio.ads		20200819050643 390edddb ada.text_io.integer_io%s
+D a-unccon.ads		20200819050643 0e9b276f ada.unchecked_conversion%s
+D escape.adb		20210218172306 0768194f escape%b
+D interfac.ads		20200819050644 5ab55268 interfaces%s
+D i-cstrea.ads		20200819050644 e53d8b8e interfaces.c_streams%s
+D system.ads		20200819050647 085b6ffb system%s
+D s-crtl.ads		20200819050645 0ebbdb71 system.crtl%s
+D s-exctab.ads		20200819050645 54135002 system.exception_table%s
+D s-ficobl.ads		20200819050645 078245e4 system.file_control_block%s
+D s-parame.ads		20200819050646 4752c4cb system.parameters%s
+D s-secsta.ads		20200819050646 9b3ab94b system.secondary_stack%s
+D s-soflin.ads		20200819050646 a7318a92 system.soft_links%s
+D s-stache.ads		20200819050646 a37c21ec system.stack_checking%s
+D s-stalib.ads		20200819050646 6b7a13f2 system.standard_library%s
+D s-stoele.ads		20200819050646 2dc34a04 system.storage_elements%s
+D s-traent.ads		20200819050646 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20200819050646 5ecf7212 system.unsigned_types%s
+D s-wchcon.ads		20200819050646 1b7d22d2 system.wch_con%s
+G a e
+G c Z b b [escape standard 6 11 none]
+X 1 ada.ads
+16K9*Ada 20e8 15|1r6 1r29 2r6 2r23 3r6 3r31 4r6 4r45
+X 3 a-flteio.ads
+20K13*Float_Text_IO[12|46] 15|1w10 1r33
+X 4 a-inteio.ads
+18K13*Integer_Text_IO[13|46] 15|3w10 3r35
+X 6 a-numeri.ads
+16K13*Numerics 32e17 15|4r10 4r49
+X 7 a-nuelfu.ads
+18K22*Elementary_Functions[8|39] 15|4w19 4r58
+X 8 a-ngelfu.ads
+52V13*Sqrt{float} 15|19s19[7|18]
+X 11 a-textio.ads
+57K13*Text_IO 727e16 15|2w10 2r27
+86I12*Field{integer}
+264U14*New_Line 15|26s33
+X 12 a-tiflio.ads
+82U14*Put 15|26s5[3|20]
+85i7 Aft{11|86I12} 15|26r17[3|20]
+86i7 Exp{11|86I12} 15|26r25[3|20]
+X 15 escape.adb
+6U11*escape 6b11 28l5 28t11
+7f5 result{float} 23m5 25m5 26r9
+10i5 earthRadius{integer} 25r34
+16V14 calEscapteVolocity{float} 16b14 16>33 21l9 21t27 25s15
+16i33 radius{integer} 19r79
+17f9 result{float} 19m9 20r16
+
