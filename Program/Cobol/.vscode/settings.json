@@ -1,0 +1,38 @@
+{
+    "coboleditor.metadata_symbols": [
+        "loanrepayment,loan_repayment.cob",
+        "bodysurfacearea,investigating_BSA.cob",
+        "bodysurfacearea,unit8_1.cob",
+        "studentloan,unit8_2.cob",
+        "windchill,unit9_1.cob",
+        "windchill,wind_child.cob",
+        "windchill,wind_chill.cob",
+        "wind_child,wind_child.cob",
+        "w,wind_child.cob",
+        "wind,wind_child.cob",
+        "windchild,wind_child.cob",
+        "windchi,wind_child.cob",
+        "timevalueofmoney,unit9_2.cob",
+        "timevalueofmoney,time_value_money.cob",
+        "time_value_money,time_value_money.cob",
+        "t,time_value_money.cob",
+        "time,time_value_money.cob",
+        "timevalue,time_value_money.cob",
+        "timevalueof,time_value_money.cob",
+        "timevalueofm,time_value_money.cob",
+        "ruleof72,unit9_3.cob",
+        "rule_72,rule_72.cob"
+    ],
+    "coboleditor.metadata_entrypoints": [],
+    "coboleditor.metadata_types": [],
+    "coboleditor.metadata_files": [
+        "1615428041680,loan_repayment.cob",
+        "1615424808643,investigating_BSA.cob",
+        "1616430620195,unit8_1.cob",
+        "1616430621802,unit8_2.cob",
+        "1616433163649,unit9_1.cob",
+        "1616433164565,unit9_2.cob",
+        "1616433165337,unit9_3.cob",
+        "1616439996772,rule_72.cob"
+    ]
+}
