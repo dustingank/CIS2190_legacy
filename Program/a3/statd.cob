@@ -59,11 +59,15 @@
      
            INPUT-LOOP.
            READ INPUT-FILE INTO INPUT-VALUE AT END GO TO B1.
+           display "input-loop 62".
            MOVE IN-X TO X(N), OUT-X.
+           display "input-loop 64".
            WRITE OUTPUT-LINE FROM DATA-LINE AFTER ADVANCING 1 LINE.
+           display "input-loop 66".
            ADD X(N) TO SX.
      
            B1.
+           display "B1 70".
            SUBTRACT 1 FROM N.
            DIVIDE N INTO SX GIVING M ROUNDED.
            PERFORM SUM-LOOP VARYING I FROM 1 BY 1 UNTIL I IS GREATER THAN N.
