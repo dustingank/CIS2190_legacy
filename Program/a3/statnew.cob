@@ -5,23 +5,23 @@ environment division.
 
 input-output section.
 file-control.
-select input-file assign to dynamic dataFile
+select inputFile assign to dynamic dataFile
     organization is line sequential.
-select output-file assign to dynamic reportFile
+select outputFile assign to dynamic reportFile
     organization is line sequential.
 
 data division.
 file section.
-fd input-file.
-01 sample-input     pic X(80).
-fd output-file.
-01 output-line     pic X(80).
+fd inputFile.
+01 sampleInput     pic X(80).
+fd outputFile.
+01 outputLine     pic X(80).
 
 working-storage section.
-77 sx   pic S9(14)V9(4) usage is COMPUTATIONAL-3.
+77 totalSum   pic S9(14)V9(4) usage is COMPUTATIONAL-3.
 77 n    pic S9999 usage is COMPUTATIONAL.
 
-77 m    pic S9(19)V9(19) usage is COMPUTATIONAL-3.
+77 medianValue    pic S9(19)V9(19) usage is COMPUTATIONAL-3.
 77 i    pic S9999 usage is COMPUTATIONAL.
 77 std  pic S9(19)V9(19) usage is COMPUTATIONAL-3.
 77 variance  pic S9(19)V9(19) usage is COMPUTATIONAL-3.
@@ -36,93 +36,111 @@ working-storage section.
 01 residue pic 9(19).
 01 result  pic 9(19).
 
-01 array-area.
+01 arrayArea.
     02 x pic S9(14)V9(4) usage is COMPUTATIONAL-3
         occurs 1000 times.
-01 input-value.
+01 inputValue.
     02 in-x pic S9(14)V9(4).
     02 filler pic X(62).
-01 title-line.
-    02 filler pic X(29) value 
-        '  MEAN AND STANDARD DEVIATION'.
-01 under-line.
-    02 filler pic X(30) value
-        '------------------------------'.
-01 col-heads.
-    02 filler pic X(21) value '          DATA VALUES'.
-01 data-line.
+01 titleLine.
+    02 filler pic X(55) value 
+        '           Data Statistics'.
+01 breakLine.
+    02 filler pic X(55) value
+        '----------------------------------------------'.
+01 colHeads.
+    02 filler pic X(55) value 
+        '            Data Values'.
+01 dataLine.
     02 filler pic X(5) value space.
-    02 out-x pic -(14)9.9(4).
-01 print-line-1.
-    02 filler pic X(11) value ' MEAN=   '.
-    02 out-mn pic -(14)9.9(4).
-01 print-line-2.
-    02 filler pic X(11) value ' VAR= '.
-    02 out-vr pic -(14)9.9(4).
-01 print-line-3.
-    02 filler pic X(11) value ' STDDEV= '.
-    02 out-st pic -(14)9.9(4).
-01 print-line-4.
-    02 filler pic X(11) value ' GEOMEAN= '.
-    02 out-gm pic -(14)9.9(4).
-01 print-line-5.
-    02 filler pic X(11) value ' HARMEAN= '.
-    02 out-hm pic -(14)9.9(4).
-01 print-line-6.
-    02 filler pic X(11) value ' MEDIAN= '.
-    02 out-md pic -(14)9.9(4).
+    02 outX pic -(14)9.9(4).
+01 printLine1.
+    02 filler pic X(22) value ' Mean =   '.
+    02 outMn pic -(14)9.9(4).
+01 printLine2.
+    02 filler pic X(22) value ' Variance = '.
+    02 outVr pic -(14)9.9(4).
+01 printLine3.
+    02 filler pic X(22) value ' Standard Deviation = '.
+    02 outSt pic -(14)9.9(4).
+01 printLine4.
+    02 filler pic X(22) value ' Geometric Mean= '.
+    02 outGm pic -(14)9.9(4).
+01 printLine5.
+    02 filler pic X(22) value ' Harmonic Mean = '.
+    02 outHm pic -(14)9.9(4).
+01 printLine6.
+    02 filler pic X(22) value ' Median = '.
+    02 outMd pic -(14)9.9(4).
 
 01 endOfFile pic A(1).
 
 procedure division.
+       *> ask user to input the file name
        display "Enter the filename needs be read(with file extention): " with no advancing.
        accept dataFile.
        display "Enter the filename of the report(with file extention): " with no advancing.
        accept reportFile.
        
-       open input input-file, output output-file.
-       write output-line from title-line after advancing 0 lines.
-       write output-line from under-line after advancing 1 lines.
-       write output-line from col-heads after advancing 1 lines.
-       write output-line from under-line after advancing 1 lines.
+       open input inputFile, output outputFile.
+       write outputLine from titleLine after advancing 0 lines.
+       write outputLine from breakLine after advancing 1 lines.
+       write outputLine from colHeads after advancing 1 lines.
+       write outputLine from breakLine after advancing 1 lines.
        
-       move zero to sx.
+       *> initialze the variable name
+       move zero to totalSum.
        move 'N' to endOfFile.
        move 1 to n.
        
+       *> loop through the file, either end at end of the file or reach 1000 line
        perform until endOfFile = 'Y' or n > 1000
-           read input-file into input-value
+           read inputFile into inputValue
                at end move 'Y' to endOfFile
                not at end 
-               move in-x to x(n), out-x
-               write output-line from data-line after advancing 1 line
-               add x(n) to sx
+               *> save the file data into array
+               move in-x to x(n), outX
+               *> save the file data into the ouput file
+               write outputLine from dataLine after advancing 1 line
+               add x(n) to totalSum
                compute n = n + 1
        end-perform.
        
        subtract 1 from n.
-       divide n into sx giving m rounded.
+       divide n into totalSum giving medianValue rounded.
        
+       *> Calculate the standard deviation
        perform calStd.
+
+       *> Calculate the geometric mean
        perform calGeoMean.
+       
+       *> Calculate the harmonic mean
        perform CalHarmonicMean.
+
+       *> Calculate the median
        perform CalMedian.
+
+       *> Calculate the variance
        perform CalVariance.
       
-       move m to out-mn.
-       move std to out-st.
-       move geoMean to out-gm.
-       move harMean to out-hm.
-       move median to out-md.
-       move variance to out-vr.
+       *> convert the result into editing from
+       move medianValue to outMn.
+       move std to outSt.
+       move geoMean to outGm.
+       move harMean to outHm.
+       move median to outMd.
+       move variance to outVr.
        
-       write output-line from under-line after advancing 1 line.
-       write output-line from print-line-1 after advancing 1 line.
-       write output-line from print-line-2 after advancing 1 line. 
-       write output-line from print-line-3 after advancing 1 line.
-       write output-line from print-line-4 after advancing 1 line.
-       write output-line from print-line-5 after advancing 1 line.
-       close input-file, output-file.
+       *> write the results into the file
+       write outputLine from breakLine after advancing 1 line.
+       write outputLine from printLine1 after advancing 1 line.
+       write outputLine from printLine2 after advancing 1 line. 
+       write outputLine from printLine3 after advancing 1 line.
+       write outputLine from printLine4 after advancing 1 line.
+       write outputLine from printLine5 after advancing 1 line.
+       write outputLine from printLine6 after advancing 1 line.
+       close inputFile, outputFile.
        stop run.
 
        calGeoMean.
@@ -158,12 +176,12 @@ procedure division.
        calStd.
            move 1 to i.
            perform until i > n 
-               subtract m from x(i) giving temp
+               subtract medianValue from x(i) giving temp
                multiply temp by temp giving temp
-               add temp to sx
+               add temp to totalSum
                compute i = i + 1
            end-perform.
-           compute std rounded = (sx / n) ** 0.5.
+           compute std rounded = (totalSum / n) ** 0.5.
            
            
 
